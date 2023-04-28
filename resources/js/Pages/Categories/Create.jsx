@@ -23,7 +23,7 @@ export default function Create(props) {
     return (
 
         <AppLayout>
-            <div className="col-md-6 mx-auto mt-5">
+            <div className="col-md-6 col-lg-4 mx-auto mt-5">
                 <div className="card">
                     <div className="card-header">Add new category</div>
                     <div className="card-body">
@@ -33,7 +33,7 @@ export default function Create(props) {
                                 <input className="form-control" type="text" id="name" onChange={handleChange}
                                        value={values.name}/>
                             </div>
-                            <button className="btn btn-success w-100">Add</button>
+                            <button className="btn btn-success w-50">Add</button>
                         </form>
                     </div>
                 </div>

@@ -29,7 +29,11 @@ class BookController extends Controller
      */
     public function create(Request $request)
     {
-        return inertia('Books/Create');
+        $categories = Category::all();
+        return inertia('Books/Create',
+            [
+                "categories"=>$categories
+            ]);
     }
 
     /**
@@ -78,16 +82,17 @@ class BookController extends Controller
      */
     public function edit(int $book_id)
     {
-
         return inertia('Books/Edit', [
-            "book"=>Book::with('category')->find(\request($book_id))
+            "book"=>Book::with('category')->find($book_id),
+            "categories"=>Category::all()
         ]);
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, int $book_id)
+    public function update(Request $request)
     {
         $request->validate([
             'title' => ['required'],
@@ -104,7 +109,8 @@ class BookController extends Controller
                 "pages.required" => "The pages field is required.",
             ]);
 
-        $book = Book::with('category')->find($request->$book_id);
+        $book = Book::with('category')->find($request->id);
+
         $book->title = $request->title;
         $book->summary = $request->summary;
         $book->ISBN = $request->ISBN;

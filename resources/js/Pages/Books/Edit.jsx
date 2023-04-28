@@ -4,7 +4,7 @@ import {router, useForm, usePage} from "@inertiajs/react";
 export default function Edit(props) {
     const {errors} = usePage().props;
 
-    const {data, setData} = useForm(props.post);
+    const {data, setData} = useForm(props.book);
 
     const handleChange = (e)=> {
         setData({
@@ -17,6 +17,13 @@ export default function Edit(props) {
         event.preventDefault();
         router.post(route("books.update", data.id), data);
     }
+    console.log(data);
+
+    const categoryOptions = [];
+    categoryOptions.push(<option key="0" value="Select category">Select category</option>);
+    props.categories.forEach((category) => {
+        categoryOptions.push(<option key={category.id} value={category.id}>{category.name}</option>);
+    });
     return (
 
         <AppLayout>
@@ -64,13 +71,14 @@ export default function Edit(props) {
                                 {errors.pages && <div className="invalid-feedback">{errors.pages}</div>}
                             </div>
                             <div className="mb-3">
-                                <label className="form-label" htmlFor="category">Category:</label>
-                                <input type="text" className={`form-control ${errors.category ? 'is-invalid' : ''}`}
-                                       id="category" value={data.category}
-                                       onChange={handleChange}/>
-                                {errors.category && <div className="invalid-feedback">{errors.category}</div>}
+                                <label className="form-label" htmlFor="category_id">Category </label>
+                                <select className='form-control'
+                                        onChange={handleChange} value={data.category_id}>
+                                    {categoryOptions}
+                                </select>
                             </div>
-                            <button className="btn btn-primary w-100" type="submit">Update</button>
+
+                            <button className="btn btn-success w-50" type="submit" >Update</button>
                         </form>
                     </div>
                 </div>

@@ -1,15 +1,16 @@
 import AppLayout from "@/Layouts/App.layout";
-import { router, useForm, usePage } from "@inertiajs/react";
+import {router, useForm, usePage} from "@inertiajs/react";
 
-export default function Create() {
-    const { data, setData } = useForm({
+export default function Create({categories}) {
+    const {data, setData} = useForm({
         title: "",
         description: "",
         text: "",
         picture: null,
         date: "",
+        category_id: null
     });
-    const { errors } = usePage().props;
+    const {errors} = usePage().props;
 
     function handleChange(e) {
         setData({
@@ -22,6 +23,12 @@ export default function Create() {
         e.preventDefault();
         router.post(route("books.store"), data);
     }
+
+    const categoryOptions = [];
+    categoryOptions.push(<option key="0" value="Select category">Select category</option>);
+    categories.forEach((category) => {
+        categoryOptions.push(<option key={category.id} value={category.id}>{category.name}</option>);
+    });
 
     return (
         <AppLayout>
@@ -92,7 +99,7 @@ export default function Create() {
                                     }`}
                                     id="picture"
                                     onChange={(e) =>
-                                        setData({ ...data, picture: e.target.files[0] })
+                                        setData({...data, picture: e.target.files[0]})
                                     }
                                 />
                                 {errors.picture && (
@@ -117,8 +124,17 @@ export default function Create() {
                                     <div className="invalid-feedback">{errors.pages}</div>
                                 )}
                             </div>
+                            <div className="mb-3">
+                                <label className="form-label" htmlFor="category_id">Category </label>
+                                <select className='form-control'
+                                        onChange={handleChange} value={data.category_id}>
+                                    {categoryOptions}
+                                </select>
+
+                            </div>
+
                             <div className="mt-3">
-                                <button type="submit" className="btn btn-primary">
+                                <button type="submit" className="btn btn-success w-50">
                                     Add
                                 </button>
                             </div>

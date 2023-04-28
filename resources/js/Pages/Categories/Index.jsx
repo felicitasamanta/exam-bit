@@ -34,12 +34,10 @@ export default function Index({categories}) {
 
     categories.forEach((category) => {
         categoriesList.push(<tr key={category.id}>
-            <td>{category.name}</td>
-            <td className="text-center">
-                <Link className="btn btn-primary" href={route('categories.edit', category.id)}>Edit</Link>
-            </td>
-            <td>
-                <button className="btn btn-danger text-center" onClick={handleDelete} value={category.id}>Delete
+            <td className='col-4'>{category.name}</td>
+            <td className="col-7 mx-auto d-flex gap-3">
+                <Link className="btn btn-info col-6" href={route('categories.edit', category.id)}>Edit</Link>
+                <button className="btn btn-danger text-center col-6" onClick={handleDelete} value={category.id}>Delete
                 </button>
             </td>
         </tr>)
@@ -48,11 +46,13 @@ export default function Index({categories}) {
     return (
 
         <AppLayout>
-            <div className="col-md-8 mt-5 mx-auto">
+            <div className="col-md-6 col-lg-5 mt-5 mx-auto text-center">
                 <div className="card">
                     <div className="card-header">Categories list</div>
+                    <div className="m-3 ">
+                        <Link className="btn btn-primary float-start" href={route("categories.create")}>Add new category</Link>
+                    </div>
                     <div className="card-body">
-                        <Link className="btn btn-success float-end" href={route("categories.create")}>Add new category</Link>
                         <table className="table">
                             <thead>
                             <tr>
