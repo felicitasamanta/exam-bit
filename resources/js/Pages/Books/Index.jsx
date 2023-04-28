@@ -29,7 +29,7 @@ export default function Index({order, books, categories, filter: filterProp}) {
     const renderBooks = () => {
         return books.map((book) => (
           <Link key={book.id} href={route('books.edit', book.id)}>
-            <div key={'book.id'} className='mx-auto border border-dark rounded py-3 px-4 bg-white col-lg-8  col-md-8 col-sm-10'>
+            <div key={'book.id'} className='mx-auto border border-dark rounded py-3 px-4 bg-white col-lg-10 col-12'>
                 <div className="d-flex">
                     <div className="col-7">
                         <div className="fs-6">{book?.category?.name}</div>
@@ -51,16 +51,16 @@ export default function Index({order, books, categories, filter: filterProp}) {
 
     return (
         <AppLayout>
-            <div className="col-lg-8 col-12-md mx-auto mt-5 d-flex flex-column gap-3">
-                {user.type ===1 && <Link  href={route('books.create')} className='btn btn-primary col-3 float-end'>Add new book</Link>}
+            <div className="col-lg-8 col-md-10 mx-auto mt-5 d-flex flex-column gap-3 hover">
+                {user.type ===1 && <Link  href={route('books.create')} className='btn btn-primary col-3 mx-auto'>Add new book</Link>}
                 <div className='col-lg-6 mx-auto'>
-                    <input id="title" type="text" className="form-control col-6 mb-3" value={filter.title || ""} placeholder="Filter by title" onChange={handleChange}/>
-                    <select id="category_id" className="form-select col-6 mb-3" value={filter.category_id || ""} onChange={handleChange}>
+                    <input id="title" type="text" className="form-control col-10 mb-3" value={filter.title || ""} placeholder="Filter by title" onChange={handleChange}/>
+                    <select id="category_id" className="form-select  col-10 mb-3" value={filter.category_id || ""} onChange={handleChange}>
                         {categoryOptions}
                     </select>
                     <div className="d-flex col-12 justify-content-center gap-3">
-                        <button className='btn btn-primary col-lg-3 col-md-6' onClick={() => handleFilter()}>Filter</button>
-                        <button className="btn btn-success col-lg-3 col-md-6 " onClick={handleClear}>Clear</button>
+                        <button className='btn btn-primary col-6 col-lg-3' onClick={() => handleFilter()}>Filter</button>
+                        <button className="btn btn-success col-6 col-lg-3 " onClick={handleClear}>Clear</button>
                     </div>
                 </div>
                 <hr/>

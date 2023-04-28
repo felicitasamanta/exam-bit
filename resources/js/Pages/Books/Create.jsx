@@ -31,7 +31,7 @@ export default function Create({categories}) {
 
     return (
         <AppLayout>
-            <div className="col-lg-8 col-12-md mx-auto mt-5">
+            <div className="mx-auto col-lg-6 col-md-8 col-sm-10 mt-5">
                 <div className="card">
                     <div className="card-header">Add new book</div>
                     <div className="card-body">

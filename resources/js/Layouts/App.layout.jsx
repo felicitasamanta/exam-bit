@@ -6,7 +6,7 @@ export default function AppLayout({children}) {
     const user = auth.user;
 
     return (
-        <div className="container mb-5">
+        <div className="container mb-5 px-3">
             <div className="row">
                 <nav className="navbar bg-body-tertiary">
                     <div className="container-fluid">

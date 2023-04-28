@@ -17,7 +17,7 @@ export default function Create(props) {
     }
     return (
         <AppLayout>
-            <div className="col-lg-8 col-md-10  mx-auto mt-5">
+            <div className=" mx-auto col-lg-6 col-md-8 col-sm-10 mt-5">
                 <div className="card">
                     <div className="card-header">Update</div>
                     <div className="card-body">
