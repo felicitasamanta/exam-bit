@@ -3,7 +3,6 @@
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -18,30 +17,28 @@ use Inertia\Inertia;
 |
 */
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/books/index', [BookController::class, 'index'])->name('books.index');
+});
+
 Route::get('/', function () {
-    return Inertia::render('Auth/Login' );
+    return Inertia::render('Auth/Login');
 });
 
 Route::get('/dashboard', function () {
     return Inertia::render('Welcome');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-Route::get('/books', [BookController::class, 'index'])->name(('books.index'));
-
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/books/{id}/edit', [BookController::class, 'edit'])->name('books.edit');
     Route::post('/books/{id}/edit', [BookController::class, 'update'])->name('books.update');
-    Route::delete('books/{id}/delete', [BookController::class, 'destroy'])->name('books.destroy');
+    Route::delete('/books/{id}/delete', [BookController::class, 'destroy'])->name('books.destroy');
     Route::post('/books/create', [BookController::class, 'store'])->name('books.store');
     Route::get('books/create', [BookController::class, 'create'])->name('books.create');
     Route::resource('/categories', CategoryController::class);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

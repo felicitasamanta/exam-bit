@@ -1,7 +1,6 @@
 import AppLayout from "@/Layouts/App.layout";
 import {useState} from "react";
 import {router} from "@inertiajs/react";
-
 export default function Create(props) {
 
     const [values, setValues] = useState(props.category);
@@ -12,7 +11,6 @@ export default function Create(props) {
             [event.target.id]: event.target.value
         })
     }
-
     const handleSubmit = (event) => {
         event.preventDefault();
         router.put(route("categories.update", values.id), values);

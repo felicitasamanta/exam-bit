@@ -1,12 +1,10 @@
 import AppLayout from "@/Layouts/App.layout";
 import {useState} from "react";
 import {router} from "@inertiajs/react";
-
 export default function Create(props) {
     const [values, setValues] = useState({
         name: "",
     });
-
     const handleChange = (event) => {
         setValues({
             ...values,

@@ -1,6 +1,5 @@
 import AppLayout from "@/Layouts/App.layout";
 import {router, useForm, usePage} from "@inertiajs/react";
-
 export default function Create({categories}) {
     const {data, setData} = useForm({
         title: "",
@@ -130,9 +129,7 @@ export default function Create({categories}) {
                                         onChange={handleChange} value={data.category_id}>
                                     {categoryOptions}
                                 </select>
-
                             </div>
-
                             <div className="mt-3">
                                 <button type="submit" className="btn btn-success w-50">
                                     Add

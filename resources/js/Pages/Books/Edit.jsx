@@ -1,6 +1,5 @@
 import AppLayout from "@/Layouts/App.layout";
 import {router, useForm, usePage} from "@inertiajs/react";
-
 export default function Edit(props) {
     const {errors} = usePage().props;
     const {data, setData} = useForm(props.book);
@@ -15,7 +14,6 @@ export default function Edit(props) {
             [e.target.id]: e.target.value,
         })
     }
-
     const handleSubmit = (event) => {
         event.preventDefault();
         router.post(route("books.update", data.id), data);

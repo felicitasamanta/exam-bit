@@ -1,7 +1,6 @@
 import AppLayout from "@/Layouts/App.layout";
 import {Link, router} from "@inertiajs/react";
 import {useState} from "react";
-
 export default function Index({categories}) {
 
     const categoriesList = [];
@@ -13,7 +12,6 @@ export default function Index({categories}) {
     const [order, setOrder] = useState({
         field: "name", dir: 1
     });
-
 
     categories.sort((a, b) => {
         if (a[order.field] > b[order.field]) {
@@ -42,9 +40,7 @@ export default function Index({categories}) {
             </td>
         </tr>)
     });
-
     return (
-
         <AppLayout>
             <div className="col-md-6 col-lg-5 mt-5 mx-auto text-center">
                 <div className="card">
