@@ -11,35 +11,33 @@ export default function AppLayout({children}) {
                 <nav className="navbar bg-body-tertiary">
                     <div className="container-fluid">
                         <div className="d-flex align-items-center gap-3 ">
-                                <Link className="navbar-brand" href={route('login')}>Books reservation app</Link>
-                                {/*<Link href={route("posts.index")} className="nav-link ">Posts</Link>*/}
-                                {/*<Link href={route("posts.acc")} className="nav-link float-end ">Profile</Link>*/}
+                            <Link className="navbar-brand" href={route('login')}>Books reservation app</Link>
+                            {/*<Link href={route("posts.index")} className="nav-link ">Posts</Link>*/}
+                            {/*<Link href={route("posts.acc")} className="nav-link float-end ">Profile</Link>*/}
+                        </div>
+                        {user == null ?
+                            <div className="float-end">
+                                {/*<Link className="btn btn-primary mr-3 " href={route("login")}>Login</Link>*/}
+                                {/*&nbsp;*/}
+                                <Link className="btn btn-info " href={route("register")}>Register</Link>
                             </div>
-                            {user == null ?
+                            :
+                            <div className="">
+                                <Link className='btn btn-link' href={route('books.index')} >Books</Link>
+                                <Link className='btn btn-link' href={route('categories.index')} >Categories</Link>
                                 <div className="float-end">
-                                    {/*<Link className="btn btn-primary mr-3 " href={route("login")}>Login</Link>*/}
-                                    {/*&nbsp;*/}
-                                    <Link className="btn btn-info " href={route("register")}>Register</Link>
-                                </div>
-                                :
-                                <div className="">
-
-                                  vienas linkas
-                                    antras linkas
-
-                                    <div className="float-end">
                                         <span>You are logged in as: <b>{user.name} ({user.type === 1 ? "administrator" : "\n" +
                                             "reader"})</b> </span>
-                                        <Link className="btn btn-warning " href={route('logout')} as="button"
-                                              method="post">Logout</Link>
-                                    </div>
-
+                                    <Link className="btn btn-warning " href={route('logout')} as="button"
+                                          method="post">Logout</Link>
                                 </div>
-                            }
-                        </div>
+
+                            </div>
+                        }
+                    </div>
                 </nav>
                 {children}
             </div>
         </div>
-);
+    );
 }

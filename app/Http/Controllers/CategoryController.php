@@ -12,7 +12,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return inertia('Categories/Index',
+            [
+                "categories"=>$categories
+            ]);
     }
 
     /**
@@ -20,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Categories/Create');
     }
 
     /**
@@ -28,7 +32,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category();
+        $category->name=$request->name;
+        $category->save();
+        return to_route('categories.index');
+
     }
 
     /**
@@ -42,9 +50,10 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
-    {
-        //
+    public function edit(Category $category){
+        return inertia('Categories/Edit',[
+            "category"=>$category
+        ]);
     }
 
     /**
@@ -52,7 +61,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->name=$request->name;
+        $category->save();
+        return to_route('categories.index');
     }
 
     /**
@@ -60,6 +71,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return to_route('categories.index');
     }
 }
