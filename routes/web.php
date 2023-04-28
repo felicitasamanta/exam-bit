@@ -34,13 +34,14 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/books', [BookController::class, 'index'])->name(('books.index'));
-Route::get('/books/{id}/edit', [BookController::class, 'edit'])->name('books.edit');
-Route::post('/books/{id}/edit', [BookController::class, 'update'])->name('books.update');
-Route::delete('books/{id}/delete', [BookController::class, 'destroy'])->name('books.destroy');
-Route::post('/books/create', [BookController::class, 'store'])->name('books.store');
-Route::get('books/create', [BookController::class, 'create'])->name('books.create');
 
-
-Route::resource('/categories', CategoryController::class);
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('/books/{id}/edit', [BookController::class, 'edit'])->name('books.edit');
+    Route::post('/books/{id}/edit', [BookController::class, 'update'])->name('books.update');
+    Route::delete('books/{id}/delete', [BookController::class, 'destroy'])->name('books.destroy');
+    Route::post('/books/create', [BookController::class, 'store'])->name('books.store');
+    Route::get('books/create', [BookController::class, 'create'])->name('books.create');
+    Route::resource('/categories', CategoryController::class);
+});
 
 require __DIR__.'/auth.php';

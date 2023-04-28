@@ -16,6 +16,7 @@ class BookController extends Controller
         $parameters = $request->query->all();
         $filter = new \stdClass();
         $filter->title = $parameters["title"] ?? "";
+        $filter->category_id=$parameters["category_id"] ?? "";
 
         return inertia('Books/Index', [
             "books" => Book::filter($filter)->with('category')->get(),

@@ -3,9 +3,12 @@ import {router, useForm, usePage} from "@inertiajs/react";
 
 export default function Edit(props) {
     const {errors} = usePage().props;
-
     const {data, setData} = useForm(props.book);
 
+    const onDelete = (e, id) => {
+        e.preventDefault();
+        router.delete(route("books.destroy", id))
+    }
     const handleChange = (e)=> {
         setData({
             ...data,
@@ -17,7 +20,6 @@ export default function Edit(props) {
         event.preventDefault();
         router.post(route("books.update", data.id), data);
     }
-    console.log(data);
 
     const categoryOptions = [];
     categoryOptions.push(<option key="0" value="Select category">Select category</option>);
@@ -77,9 +79,9 @@ export default function Edit(props) {
                                     {categoryOptions}
                                 </select>
                             </div>
-
-                            <button className="btn btn-success w-50" type="submit" >Update</button>
+                            <button className="btn btn-success w-50 mx-auto" type="submit" >Update</button>
                         </form>
+                        <button type="button" className='btn btn-danger mt-3 w-50 text-center' onClick={(e) => onDelete(e, data.id)}>Delete</button>
                     </div>
                 </div>
             </div>

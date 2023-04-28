@@ -20,6 +20,9 @@ class Book extends Model
         if ($filter->title != null) {
             $query->where("title", "like", "%$filter->title%");
         }
+        if ($filter->category_id != null) {
+            $query->where("category_id", $filter->category_id);
+        }
     }
 
 }
